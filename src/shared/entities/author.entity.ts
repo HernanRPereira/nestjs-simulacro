@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Book } from './book.entity';
 
 @Entity()
@@ -9,7 +15,7 @@ export class Author {
   @Column()
   name: string;
 
-  @ManyToMany(() => Book, book => book.authors)
+  @ManyToMany(() => Book, (book) => book.authors)
   @JoinTable()
   books: Book[];
 }
