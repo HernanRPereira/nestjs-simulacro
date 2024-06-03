@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, DeleteDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 import { Author } from './author.entity';
+import { Sale } from './sale.entity';
 
 @Entity()
 export class Book {
@@ -9,10 +16,12 @@ export class Book {
   @Column()
   title: string;
 
-  @ManyToMany(() => Author, author => author.books)
-  @JoinTable()
+  @Column()
+  description: string;
+
+  @ManyToMany(() => Author, (author) => author.books)
   authors: Author[];
 
-  @DeleteDateColumn()
-  deletedAt?: Date;
+  @OneToMany(() => Sale, (sale) => sale.book)
+  sales: Sale[];
 }

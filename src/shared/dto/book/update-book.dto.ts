@@ -6,6 +6,8 @@ export class UpdateBookDto {
   @IsString()
   readonly title?: string;
 
+  readonly description?: string;
+
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })

@@ -7,6 +7,5 @@ export class CreateSaleDto {
   @IsString()
   readonly customer: string;
 
-  @IsDateString()
-  readonly saleDate: string;
+  readonly saleDate: Date;
 }
