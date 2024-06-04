@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateAuthorDto, UpdateAuthorDto } from 'src/shared/dto';
 import { AuthorService } from './authors.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('authors')
 @Controller('authors')
 export class AuthorsController {
 

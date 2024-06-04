@@ -21,8 +21,8 @@ export class SaleService {
     return this.saleRepository.save(sale);
   }
 
-  findAll(): Promise<Sale[]> {
-    return this.saleRepository.find({ relations: ['book'] });
+  findAll(skip: number = 0, take: number = 10): Promise<Sale[]> {
+    return this.saleRepository.find({ relations: ['book'], skip, take });
   }
 
   findOne(id: number): Promise<Sale> {
