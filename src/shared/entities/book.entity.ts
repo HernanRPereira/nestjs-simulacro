@@ -24,4 +24,7 @@ export class Book {
 
   @OneToMany(() => Sale, (sale) => sale.book)
   sales: Sale[];
+
+  @Column({ type: 'timestamp', default: null, nullable: true, name: 'deleted_at' })
+  deletedAt: Date; // Columna para soft delete
 }

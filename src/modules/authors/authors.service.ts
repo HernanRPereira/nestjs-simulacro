@@ -16,8 +16,8 @@ export class AuthorService {
     return this.authorRepository.save(author);
   }
 
-  findAll(): Promise<Author[]> {
-    return this.authorRepository.find({ relations: ['books'] });
+  findAll(skip: number = 0, take: number = 10): Promise<Author[]> {
+    return this.authorRepository.find({ relations: ['books'], skip, take });
   }
 
   findOne(id: number): Promise<Author> {

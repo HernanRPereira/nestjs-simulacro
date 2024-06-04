@@ -21,8 +21,8 @@ export class BookService {
     return this.bookRepository.save(book);
   }
 
-  findAll(): Promise<Book[]> {
-    return this.bookRepository.find({ relations: ['authors'] });
+  findAll(skip: number = 0, take: number = 10): Promise<Book[]> {
+    return this.bookRepository.find({ relations: ['authors'], skip, take });
   }
 
   findOne(id: number): Promise<Book> {
@@ -46,5 +46,9 @@ export class BookService {
 
   async remove(id: number): Promise<void> {
     await this.bookRepository.softDelete(id);
+  }
+
+  async deleteOne(id: number): Promise<void> {
+    await this.bookRepository.delete(id);
   }
 }

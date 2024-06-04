@@ -21,6 +21,6 @@ import { Author, Book, Sale } from './shared/entities/index';
     SalesModule,
   ],
   controllers: [],
-  providers: [TestDbService],
+  providers: [],
 })
 export class AppModule {}

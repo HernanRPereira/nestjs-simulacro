@@ -5,7 +5,8 @@ export class CreateBookDto {
   @IsString()
   readonly title: string;
 
-  readonly description: string;
+  @IsString()
+  description: string;
 
   @IsArray()
   @ValidateNested({ each: true })
