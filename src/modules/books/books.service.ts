@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBookDto, UpdateBookDto } from 'src/shared/dto';
 import { Author, Book } from 'src/shared/entities';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 
 @Injectable()
@@ -50,5 +50,13 @@ export class BookService {
 
   async deleteOne(id: number): Promise<void> {
     await this.bookRepository.delete(id);
+  }
+
+  async findByAuthor(authorId: number): Promise<Book[]> {
+    return this.bookRepository.find({ where: { authors: { id: authorId } }, relations: ['authors'] });
+  }
+
+  async findByTitle(title: string): Promise<Book[]> {
+    return this.bookRepository.find({ where: { title: Like(`%${title}%`) }, relations: ['authors'] });
   }
 }

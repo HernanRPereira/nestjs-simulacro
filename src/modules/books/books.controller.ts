@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { BookService } from './books.service';
 import { CreateBookDto, UpdateBookDto } from 'src/shared/dto';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('books')
 @Controller('books')
@@ -16,8 +16,16 @@ export class BooksController {
   }
 
   @Get()
-  findAll() {
-    return this.bookService.findAll();
+  @ApiQuery({ name: 'authorId', required: false })
+  @ApiQuery({ name: 'title', required: false })
+  findAll(@Query('authorId') authorId?: number, @Query('title') title?: string) {
+    if (authorId) {
+      return this.bookService.findByAuthor(authorId);
+    } else if (title) {
+      return this.bookService.findByTitle(title);
+    } else {
+      return this.bookService.findAll();
+    }
   }
 
   @Get(':id')
